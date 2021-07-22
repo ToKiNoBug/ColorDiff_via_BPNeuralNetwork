@@ -15,11 +15,19 @@ VectorXf logsig(VectorXf x)
 	return 1.0/(1.0+(-x.array()).exp());
 }
 
+VectorXf tansig(VectorXf x)
+{
+	return 2.0/(1.0+(-2.0*x).array().exp())-1.0;
+}
+
 void RGB2Lab(float R,float G,float B,float&L,float&a,float&b)
 {
 	Vector3f Color(R,G,B);
-	Vector3f Lab=logsig(LW*logsig(IW*Color+Ib)+Lb);
-	L=Lab(0);a=Lab(1);b=Lab(2);
+	Vector3f Lab=tansig(LW*logsig(IW*Color+Ib)+Lb);
+	L=Lab(0)*(99.9682-0.0540)+0.0540;
+	a=Lab(1)*(98.1060+86.0595)-86.0595;
+	b=Lab(2)*(94.4598+107.6646)-107.6646;
+	//-107.6646   94.4598
 	
 }
 
@@ -65,7 +73,7 @@ cout<<Lb<<endl;
 
 
 float LAB[3];
-RGB2Lab(1,1,1,LAB[0],LAB[1],LAB[2]);
+RGB2Lab(0,0,0,LAB[0],LAB[1],LAB[2]);
 cout<<LAB[0]<<"     "<<LAB[1]<<"     "<<LAB[2];
 
 	return 0;
