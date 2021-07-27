@@ -1,7 +1,7 @@
 #include "mex.h"
 #include <cmath>
 #define M_PI 3.14159265358979323846
-#define deg2rad(deg) (deg)*M_PI/180.0;
+#define deg2rad(deg) (deg)*M_PI/180.0
 
 #define kL 1.0
 #define kC 1.0
@@ -55,8 +55,8 @@ double Lab00(const double&L1,const double&a1,const double&b1,const double&L2,con
 
 
 
-    double dLp=(L1+L2)/2;
-    double dCp=(C1p+C2p)/2;
+    double mLp=(L1+L2)/2;
+    double mCp=(C1p+C2p)/2;
     double mhp;
     if(C1p*C2p==0)
     {
