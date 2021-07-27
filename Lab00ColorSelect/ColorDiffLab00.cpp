@@ -32,7 +32,7 @@ double Lab00(const double&L1,const double&a1,const double&b1,const double&L2,con
     if(h1p<0)h1p+=2*M_PI;
 
     if(b2==0&&a2p==0)h2p=0;
-    else h2p=atan2(b1,a2p);
+    else h2p=atan2(b2,a2p);
     if(h2p<0)h2p+=2*M_PI;
     
     double dLp=L2-L1;
@@ -82,7 +82,7 @@ double Lab00(const double&L1,const double&a1,const double&b1,const double&L2,con
 
     double T=1-0.17*cos(mhp-deg2rad(30))+0.24*cos(2*mhp)+0.32*cos(3*mhp+deg2rad(6))-0.20*cos(4*mhp-deg2rad(63));
 
-    double dTheta=30*exp(-square((mhp-deg2rad(275))/25));
+    double dTheta=deg2rad(30)*exp(-square((mhp-deg2rad(275))/deg2rad(25)));
 
     double RC=2*sqrt(pow(mCp,7)/(pow(25,7)+pow(mCp,7)));
 
@@ -134,23 +134,8 @@ void mexFunction(int outC,mxArray *outV[],int inC,const mxArray *inV[])
 
     for(size_t i=0;i<N;i++)
     {
-        *outPtr=Lab00(*L1,*a1,*b1,*L2,*a2,*b2);
+        outPtr[i]=Lab00(L1[i],a1[i],b1[i],L2[i],a2[i],b2[i]);
     }
     return;
 
 }
-
-/*
-void mexFunction(int outC,mxArray *outV[],int inC,const mxArray *inV[])
-{
-    if(inC<=0)return;
-    if(!mxIsSingle(inV[0]))mexErrMsgTxt("Input matrix type error, You should only input float32(single) matrix");
-    size_t N=mxGetM(inV[0])*mxGetN(inV[0]);
-    outV[0]=mxCreateNumericMatrix(mxGetM(inV[0]),mxGetN(inV[0]),mxINT32_CLASS,mxREAL);
-    int *i=(int*)mxGetPr(outV[0]);
-    const float *f=(float*)mxGetPr(inV[0]);
-    for(size_t c=0;c<N;c++)
-        *(i++)=*((int*)(f++));
-    return;
-}
-*/
