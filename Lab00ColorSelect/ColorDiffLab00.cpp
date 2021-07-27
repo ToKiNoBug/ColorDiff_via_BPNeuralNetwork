@@ -2,10 +2,12 @@
 #include <cmath>
 #define M_PI 3.14159265358979323846
 #define deg2rad(deg) (deg)*M_PI/180.0
-
+#define rad2deg(rad) (rad)*180.8/M_PI
 #define kL 1.0
 #define kC 1.0
 #define kH 1.0
+
+#define ShowIntermedium
 
 using namespace std;
 
@@ -25,9 +27,9 @@ double Lab00(const double&L1,const double&a1,const double&b1,const double&L2,con
     double C1p=sqrt(a1p*a1p+b1*b1);
     double C2p=sqrt(a2p*a2p+b2*b2);
     double h1p,h2p;
-    if(b1==a1p==0)h1p=0;
+    if(b1==0&&a1p==0)h1p=0;
     else h1p=atan2(b1,a1p);
-    if(b2==a2p==0)h2p=0;
+    if(b2==0&&a2p==0)h2p=0;
     else h2p=atan2(b1,a2p);
     
     double dLp=L2-L1;
@@ -90,6 +92,26 @@ double Lab00(const double&L1,const double&a1,const double&b1,const double&L2,con
     double RT=-RC*sin(2*dTheta);
 
     double Diffsquare=square(dLp/SL/kL)+square(dCp/SC/kC)+square(dHp/SH/kH)+RT*(dCp/SC/kC)*(dHp/SH/kH);
+
+#ifdef ShowIntermedium
+    printf("%s%lf\n","a1p=",a1p);    
+    printf("%s%lf\n","a2p=",a2p);
+
+    printf("%s%lf\n","C1p=",C1p);    
+    printf("%s%lf\n","C2p=",C2p);
+
+    printf("%s%lf\n","h1p=",h1p);    
+    printf("%s%lf\n","h2p=",h2p);
+
+    printf("%s%lf\n","mhp=",mhp);
+    printf("%s%lf\n","G=",G);
+    printf("%s%lf\n","T=",T);
+    printf("%s%lf\n","SL=",SL);
+    printf("%s%lf\n","SC=",SC);
+    printf("%s%lf\n","SH=",SH);
+    printf("%s%lf\n","RT=",RT);
+
+#endif
 
     return sqrt(Diffsquare);
 
