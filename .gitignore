@@ -5,3 +5,4 @@
 *.o
 IORestore/build-Mult_sin-Desktop_Qt_6_0_4_MinGW_64_bit-Debug/Makefile
 *.Debug
+IORestore/build-Mult_sin-Desktop_Qt_6_0_4_MinGW_64_bit-Release/Makefile

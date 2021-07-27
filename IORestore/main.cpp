@@ -2,7 +2,10 @@
 #include <Eigen/Dense>
 #include <cmath>
 #include <ctime>
-#define tansig(x) MatrixXd(2.0/(1.0+(-2.0*(x).array()).exp())-1.0)
+
+#define tansig(x) MatrixXd(2.0*(1.0+(-2.0*(x).array()).exp()).inverse()-1.0)
+#define logsig(x) MatrixXd((1.0+(-x.array()).exp()).inverse())
+
 
 using namespace std;
 using namespace Eigen;
@@ -68,12 +71,7 @@ auto tansig(MatrixXd x)
 double sin_mult(double x,double y)
 {
     Vector2d I=Vector2d(x,y).array()/2.0-1.0;
-    auto res1 = tansig(W1*I+b1);
-    //cout<<"size of res1=["<<res.rows()<<','<<res.cols()<<"]\n";
-
-    auto res2 = tansig(W2*res1+b2);
-
-    auto res3 = tansig(W3*res2+b3);
+    auto res3 = tansig(W3*tansig(W2*tansig(W1*I+b1)+b2)+b3);
 
     return res3(0);
 }
@@ -89,6 +87,9 @@ int main()
     double x,y;
     srand(time(0));
     double nr,sr;
+
+    cout<<W1<<endl;
+
     for(int c=0;c<100;c++)
     {
     x=4*randd();
