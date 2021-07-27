@@ -98,7 +98,7 @@ double Lab00(const double&L1,const double&a1,const double&b1,const double&L2,con
 void mexFunction(int outC,mxArray *outV[],int inC,const mxArray *inV[])
 {
     if(inC<6)return;
-    if(outC<=0)return;
+    //if(outC<=0)return;
     //if(!mxIsDouble(inV[0]))mexErrMsgTxt("Input matrix type error, You should only input float64(double) matrix");
     size_t N=mxGetM(inV[0])*mxGetN(inV[0]);
     outV[0]=mxCreateNumericMatrix(mxGetM(inV[0]),mxGetN(inV[0]),mxDOUBLE_CLASS,mxREAL);
