@@ -1,16 +1,19 @@
 #include <iostream>
 #include <Eigen/Dense>
-
-#define tansig(x) 2.0/(1.0+(-2.0*(x)).array().exp())-1.0
+#include <cmath>
+#define tansig(x) MatrixXd(2.0/(1.0+(-2.0*(x).array()).exp())-1.0)
 
 using namespace std;
 using namespace Eigen;
 
-Matrix<double,8,2> W1;
-Matrix<double,8,8> W2;
-Matrix<double,1,8> W3;
-Matrix<double,8,1> b1,b2;
-double b3;
+
+
+MatrixXd W1(8,2);
+MatrixXd W2(8,8);
+MatrixXd W3(1,8);
+MatrixXd b1(8,1),b2(8,1);
+
+MatrixXd b3(1,1);
 
 void initializeWb()
 {
@@ -52,7 +55,7 @@ void initializeWb()
             -16.045664116371955998374687624163925647735595703125,
             10.0378946902186090284203601186163723468780517578125;
 
-    b3=-1.3741243314987574564156602718867361545562744140625;
+    b3<<-1.3741243314987574564156602718867361545562744140625;
 }
 /*
 auto tansig(MatrixXd x)
@@ -64,13 +67,27 @@ auto tansig(MatrixXd x)
 double sin_mult(double x,double y)
 {
     Vector2d I=Vector2d(x,y).array()/2.0-1.0;
-    //auto res = W2*(tansig(W1*I+b1))+b2;
-    return 0;
+    auto res1 = tansig(W1*I+b1);
+    //cout<<"size of res1=["<<res.rows()<<','<<res.cols()<<"]\n";
+
+    auto res2 = tansig(W2*res1+b2);
+
+    auto res3 = tansig(W3*res2+b3);
+
+    return res3(0);
 }
 
 int main()
 {
     initializeWb();
-    cout<<W1.rows()<<W1.cols()<<endl;
+    double x,y;
+
+    x=1.0;
+    y=1.0;
+    cout<<"sin("<<x<<"*"<<y<<")=:"<<endl;
+    cout<<"Network result="<<sin_mult(x,y)<<endl;;
+
+    cout<<"standard result="<<sin(x*y)<<endl;
+
     return 0;
 }
