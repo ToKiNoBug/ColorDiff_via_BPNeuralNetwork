@@ -29,8 +29,11 @@ double Lab00(const double&L1,const double&a1,const double&b1,const double&L2,con
     double h1p,h2p;
     if(b1==0&&a1p==0)h1p=0;
     else h1p=atan2(b1,a1p);
+    if(h1p<0)h1p+=2*M_PI;
+
     if(b2==0&&a2p==0)h2p=0;
     else h2p=atan2(b1,a2p);
+    if(h2p<0)h2p+=2*M_PI;
     
     double dLp=L2-L1;
     double dCp=C2p-C1p;
@@ -100,10 +103,10 @@ double Lab00(const double&L1,const double&a1,const double&b1,const double&L2,con
     printf("%s%lf\n","C1p=",C1p);    
     printf("%s%lf\n","C2p=",C2p);
 
-    printf("%s%lf\n","h1p=",h1p);    
-    printf("%s%lf\n","h2p=",h2p);
+    printf("%s%lf\n","h1p=",rad2deg(h1p));    
+    printf("%s%lf\n","h2p=",rad2deg(h2p));
 
-    printf("%s%lf\n","mhp=",mhp);
+    printf("%s%lf\n","mhp=",rad2deg(mhp));
     printf("%s%lf\n","G=",G);
     printf("%s%lf\n","T=",T);
     printf("%s%lf\n","SL=",SL);
