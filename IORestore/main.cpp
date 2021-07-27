@@ -1,6 +1,7 @@
 #include <iostream>
 #include <Eigen/Dense>
 #include <cmath>
+#include <ctime>
 #define tansig(x) MatrixXd(2.0/(1.0+(-2.0*(x).array()).exp())-1.0)
 
 using namespace std;
@@ -77,17 +78,28 @@ double sin_mult(double x,double y)
     return res3(0);
 }
 
+inline double randd()
+{
+    return (rand()%65536)/65535.0;
+}
+
 int main()
 {
     initializeWb();
     double x,y;
-
-    x=1.0;
-    y=1.0;
+    srand(time(0));
+    double nr,sr;
+    for(int c=0;c<100;c++)
+    {
+    x=4*randd();
+    y=4*randd();
+    nr=sin_mult(x,y);
+    sr=sin(x*y);
     cout<<"sin("<<x<<"*"<<y<<")=:"<<endl;
-    cout<<"Network result="<<sin_mult(x,y)<<endl;;
-
-    cout<<"standard result="<<sin(x*y)<<endl;
-
+    cout<<"Network result="<<nr<<"    ";
+    cout<<"standard result="<<sr<<"    "<<"releative error:"<<(nr-sr)/sr*100<<"%\n";
+    cout<<endl<<endl;
+    }
+    system("pause");
     return 0;
 }
