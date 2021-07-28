@@ -43,16 +43,16 @@ double Lab00(const double&L1,const double&a1,const double&b1,const double&L2,con
         dhp=0;
     }
     else{
-        if(abs(h2p-h1p)<=deg2rad(180))
+        if(abs(h2p-h1p)<=deg2rad(180.0))
         {
             dhp=h2p-h1p;
         }
-        else if(h2p-h1p>deg2rad(180))
+        else if(h2p-h1p>deg2rad(180.0))
         {
-            dhp=h2p-h1p-deg2rad(360);
+            dhp=h2p-h1p-deg2rad(360.0);
         }
         else{
-            dhp=h2p-h1p+deg2rad(360);
+            dhp=h2p-h1p+deg2rad(360.0);
         }
     }
 
