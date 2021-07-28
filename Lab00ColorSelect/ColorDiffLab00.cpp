@@ -7,7 +7,7 @@
 #define kC 1.0
 #define kH 1.0
 
-#define ShowIntermedium
+//#define ShowIntermedium
 
 using namespace std;
 

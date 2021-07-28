@@ -4,4 +4,3 @@ function [Diff] = Lab00Matcher(Color1,Color2)
 N=size(Color2,2);
 
 end
-
